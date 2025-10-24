@@ -1,4 +1,4 @@
-#include"../modular/client/client.h"
+#include"../modular/client.h"
 #include<unistd.h>
 #include<iostream>
 #include<sys/select.h>
@@ -30,14 +30,14 @@ void Client::make_request(){
         }
 
         if(FD_ISSET(STDIN_FILENO,&readfs)){
-            //user wants to type message
+            //std input read user's message from input
             string msg;
             getline(cin,msg);
             write(cli_socket,msg.c_str(),msg.length());
         }
 
         if(FD_ISSET(cli_socket,&readfs)){
-            //server se kuch message aya
+            //message arrived from other users
             memset(buffer,0,sizeof(buffer));
             int bytes_read = read(cli_socket,buffer,1000);
             if(bytes_read<=0){

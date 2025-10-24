@@ -1,4 +1,4 @@
-#include"../modular/server/server.h"
+#include"../modular/server.h"
 #include<unistd.h>
 #include<arpa/inet.h>
 #include<iostream>
@@ -33,7 +33,7 @@ void Server::launch(){
         }
 
         if(FD_ISSET(serv_socket,&readfs)){
-            //new connection aya    
+            //new connection    
             client = accept(serv_socket,(struct sockaddr*)&client_address,(socklen_t *)&cliaddr_length);
             if(client<0){
                 cerr<<"Failed to accept connection...\n";
